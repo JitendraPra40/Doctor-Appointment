@@ -1,0 +1,49 @@
+#server
+server:
+  port: 8082
+
+# Application
+spring:
+  application:
+    name: doctor-service
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://auth-service/.well-known/jwks.json
+          issuer-uri: http://localhost:9000
+
+  # Database (MySql)
+  datasource:
+      url: jdbc:mysql://localhost:3306/a_doctordb
+      username: root
+      password: root
+
+# JPA / Hibernate
+  jpa:
+    hibernate:
+      ddl-auto: update   # Use validate when Flyway is enabled
+    show-sql: true
+
+# Flyway
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+# Kafka
+  kafka:
+    bootstrap-servers: localhost:9092
+
+
+#Security (RS256 - JWT Resource Server)
+
+
+#eureka
+eureka:
+  client:
+    service-url:
+        defaultZone: http://localhost:8761/eureka/
+
+
+
