@@ -1,0 +1,23 @@
+spring.application.name=api-gateway
+
+server.port=8080
+
+# Enable detailed logging
+logging.level.org.springframework.cloud.gateway=TRACE
+logging.level.reactor.netty.http.client=DEBUG
+
+# Route configuration
+spring.cloud.gateway.routes[0].id=doctor-service
+spring.cloud.gateway.routes[0].uri=http://localhost:8082
+spring.cloud.gateway.routes[0].predicates[0]=Path=/api/v1/doctors/**
+
+# Add some debug headers
+spring.cloud.gateway.routes[0].filters[0]=AddRequestHeader=X-Gateway-Route, doctor-service
+
+## JWT (LOCAL URL – no Eureka confusion)
+#spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://localhost:8081/.well-known/jwks.json
+#
+## Eureka
+#eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+
+
