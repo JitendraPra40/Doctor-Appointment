@@ -12,8 +12,8 @@ import java.util.UUID;
 @Table(name = "admin")
 public class Admin {
         @Id
-        @GeneratedValue
-        private UUID id;
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
         @Column(nullable = false)
         private String username;

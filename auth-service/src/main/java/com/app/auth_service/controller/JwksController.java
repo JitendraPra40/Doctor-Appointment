@@ -15,9 +15,12 @@ public class JwksController {
         this.jwkSet = jwkSet;
     }
 
-    @GetMapping("/.well-known/jwks.json")
+    // Add the missing prefix from your YAML here
+    @GetMapping("/sso-auth-server/.well-known/jwks.json")
     public Map<String, Object> keys() {
-        return this.jwkSet.toJSONObject();
+        return jwkSet.toJSONObject();
     }
 }
+
+
 

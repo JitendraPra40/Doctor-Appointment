@@ -6,6 +6,7 @@ import com.app.doctor_service.service.DoctorService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -14,7 +15,8 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/doctors")
-//@PreAuthorize("hasRole('DOCTOR') or hasRole('ADMIN')")
+@PreAuthorize("hasAuthority('ROLE_DOCTOR') or hasAuthority('ROLE_ADMIN')")
+
 public class DoctorController {
 
     private final DoctorService doctorService;
@@ -51,6 +53,14 @@ public class DoctorController {
     public List<TimeSlot> getTimeSlots(@PathVariable Long doctorId,
                                 @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date ) {
         return doctorService.getSlots(doctorId, date);
+    }
+
+    @GetMapping("/api/v1/doctors/debug")
+    public String debug(Authentication auth) {
+        if (auth == null) {
+            return "No authentication found!";
+        }
+        return "Your Authorities: " + auth.getAuthorities().toString();
     }
 }
 

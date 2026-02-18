@@ -19,7 +19,8 @@ public class SecurityConfig {
                                 "/.well-known/jwks.json",
                                 "/actuator/**",
                                 "/api/v1/auth/**",
-                                "/api/admin/**"
+                                "/api/v1/auth/admin/**",
+                                "/sso-auth-server/.well-known/jwks.json"
                         ).permitAll()
                         .anyRequest().authenticated()
                 );

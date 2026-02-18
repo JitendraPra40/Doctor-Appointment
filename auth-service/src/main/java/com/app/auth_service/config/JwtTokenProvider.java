@@ -19,18 +19,15 @@ public class JwtTokenProvider {
     }
 
     public String generateAccessToken(User user, long expiryMs) {
-
-        Date now = new Date();
-
         return Jwts.builder()
-                .setId(UUID.randomUUID().toString())
-                .setSubject(String.valueOf(user.getId()))   // ✅ userId
+                .setHeaderParam("kid", "my-key-id")
+                .setIssuer("http://localhost:8081") // Match this to your YAML
+                .setSubject(String.valueOf(user.getId()))
                 .claim("role", "ROLE_" + user.getRole().name())
-                .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + expiryMs))
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expiryMs))
                 .signWith(privateKey, SignatureAlgorithm.RS256)
                 .compact();
     }
-
 
 }

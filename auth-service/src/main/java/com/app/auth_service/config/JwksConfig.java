@@ -14,9 +14,8 @@ public class JwksConfig {
     @Bean
     public JWKSet jwkSet(RSAPublicKey publicKey) {
         RSAKey rsaKey = new RSAKey.Builder(publicKey)
-                .keyID(UUID.randomUUID().toString())
+                .keyID("my-key-id") // Same ID as above
                 .build();
-
         return new JWKSet(rsaKey);
     }
 }

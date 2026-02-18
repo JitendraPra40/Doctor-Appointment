@@ -6,6 +6,7 @@ import com.app.auth_service.entity.Admin;
 import com.app.auth_service.entity.User;
 import com.app.auth_service.exception.NotFoundException;
 import com.app.auth_service.propertiesConfig.JwtProperties;
+import com.app.auth_service.repository.AdminRepository;
 import com.app.auth_service.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class AdminService {
         this.refreshTokenService = refreshTokenService;
         this.emailOtpService = emailOtpService;
         this.userRepository = userRepository;
+
     }
 
     public void sendEmailOtp(String email) {
@@ -57,4 +59,5 @@ public class AdminService {
         String refresh = refreshTokenService.createRefreshToken(user);
         return new TokensDto(access, refresh);
     }
+
 }
