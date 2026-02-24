@@ -1,13 +1,15 @@
 package com.app.doctor_service.service;
 
-
 import com.app.doctor_service.entity.Doctor;
 import com.app.doctor_service.entity.TimeSlot;
 import com.app.doctor_service.repository.DoctorRepository;
 import com.app.doctor_service.repository.TimeSlotRepository;
-import jakarta.ws.rs.BadRequestException;
+// FIX: Removed 'jakarta.ws.rs.BadRequestException' — that's JAX-RS, not on the classpath.
+// This project uses Spring MVC. Use Spring's ResponseStatusException instead.
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -31,62 +33,46 @@ public class DoctorService {
 
     @Transactional
     public Doctor createDoctor(Doctor doctor) {
-
-        // 1. Basic validation
         if (doctor.getFee().compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("Doctor fee must be positive");
+            // FIX: Use ResponseStatusException (Spring) instead of BadRequestException (JAX-RS)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Doctor fee must be positive");
         }
 
-        // 2. Initialize & link addresses
         if (doctor.getAddresses() != null) {
-            doctor.getAddresses().forEach(address ->
-                    address.setDoctor(doctor)
-            );
+            doctor.getAddresses().forEach(address -> address.setDoctor(doctor));
         }
 
-//        // 3. Initialize & link time slots
-//        if (doctor.getTimeSlots() != null) {
-//            doctor.getTimeSlots().forEach(slot ->
-//                    slot.setDoctor(doctor)
-//            );
-//        }
-
-        // 4. Save aggregate root
         return doctorRepo.save(doctor);
     }
 
     @Transactional
     public void deleteDoctor(Long id) {
-
         if (!doctorRepo.existsById(id)) {
-            throw new RuntimeException("Invalid Doctor Id");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid Doctor Id");
         }
         doctorRepo.deleteById(id);
     }
 
     @Transactional
     public TimeSlot createSlot(Long doctorId, TimeSlot slot) {
-
         Doctor doctor = doctorRepo.findById(doctorId)
-                .orElseThrow(() -> new RuntimeException("Doctor not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Doctor not found"));
 
         slot.setDoctor(doctor);
 
         if (!slot.getEndTime().isAfter(slot.getStartTime())) {
-            throw new IllegalArgumentException("End time must be after start time");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "End time must be after start time");
         }
-        TimeSlot saved =  slotRepo.save(slot);
-       // producer.publishAvailability(doctorId);
-        return saved;
-    }
 
+        return slotRepo.save(slot);
+    }
 
     public List<TimeSlot> getSlots(Long doctorId, LocalDate date) {
         return slotRepo.findByDoctorIdAndSlotDate(doctorId, date);
     }
 
     public Doctor getDoctor(Long doctorId) {
-        return doctorRepo.findById(doctorId).orElseThrow(() -> new RuntimeException("Enter Valid DoctorID"));
+        return doctorRepo.findById(doctorId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Enter Valid DoctorID"));
     }
 }
-

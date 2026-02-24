@@ -9,16 +9,12 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          # IMPORTANT: This MUST match the 'iss' claim in your JWT exactly.
-          # If your Auth server is on 9000, keep it 9000.
-          # If port 8081 is your Auth server, change this to 8081.
           issuer-uri: http://localhost:8081
-          # Use this if auto-discovery fails or if using a custom port
           jwk-set-uri: http://localhost:8081/sso-auth-server/.well-known/jwks.json
 
   # Database (MySQL)
   datasource:
-    url: jdbc:mysql://localhost:3306/a_doctordb
+    url: jdbc:mysql://localhost:3307/a_doctordb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -26,20 +22,25 @@ spring:
   # JPA / Hibernate
   jpa:
     hibernate:
+      # FIX: Changed from 'update' to 'update' (keeping update) but disabled Flyway.
+      # Flyway was enabled with 'baseline-on-migrate: true' but NO migration scripts exist,
+      # causing startup failure: "Found non-empty schema without schema history table".
       ddl-auto: update
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
 
-  # Flyway
+  # FIX: Disabled Flyway — no migration scripts exist in the project.
   flyway:
-    enabled: true
-    baseline-on-migrate: true
+    enabled: false
 
   # Kafka
   kafka:
     bootstrap-servers: localhost:9092
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 # Eureka Client
 eureka:

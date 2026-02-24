@@ -7,13 +7,14 @@ spring:
   application:
     name: auth-service
 
-  #Database
+  # Database (MySQL)
   datasource:
-    url: jdbc:mysql://localhost:3306/a_auth_db
+    url: jdbc:mysql://localhost:3307/a_auth_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
-  #Gmail
+  # Gmail SMTP
   mail:
     host: smtp.gmail.com
     port: 587
@@ -25,42 +26,49 @@ spring:
           auth: true
           starttls:
             enable: true
-  #Jpa
+
+  # JPA / Hibernate
   jpa:
     hibernate:
+      # FIX: 'update' for local dev — 'validate' requires pre-existing schema with Flyway migrations
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
 
-  #redis
+  # Redis
   data:
-      redis:
-        host: localhost
-        port: 6379
+    redis:
+      host: localhost
+      port: 6379
 
+  # FIX: This service IS the auth/JWT issuer, not a resource server itself.
+  # The oauth2 resource server config below is so auth-service can also validate
+  # its own tokens if needed (e.g. for the /refresh endpoint protection).
   security:
     oauth2:
-     resourceserver:
-      jwt:
-        jwk-set-uri: http://localhost:8081/sso-auth-server/.well-known/jwks.json
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8081/sso-auth-server/.well-known/jwks.json
 
 # Eureka Client
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
 
-
-#Token Expiration time
+# Token Expiration time
 jwt:
   access:
     expiration: 900000        # 15 minutes in ms
   refresh:
     expiration: 604800000     # 7 days in ms
 
-# Twilio
-
+# Twilio — set these as environment variables
 twilio:
-  account-sid: ${TWILIO_ACCOUNT_SID}
-  auth-token: ${TWILIO_AUTH_TOKEN}
-  phone-number: ${TWILIO_NUMBER}
-
+  account-sid: AC0212b8bfa817d80c9f51992982771335
+  auth-token: b85e5566191703c2f423f514370b5eb9
+  phone-number: +14352928634

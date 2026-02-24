@@ -35,12 +35,11 @@ public class PaymentService {
         payment.setAppointmentId(appointmentId);
         payment.setRazorpayOrderId(orderId);
         payment.setRazorpayPaymentId(paymentId);
-        payment.setAmount(amount);
-        payment.setStatus("SUCCESS");
+        payment.setAmount(amount.doubleValue());           // FIX line 38: BigDecimal → Double
+        payment.setStatus(Payment.PaymentStatus.SUCCESS);  // FIX line 39: String → PaymentStatus enum
 
         repo.save(payment);
 
         kafka.send("payment-events", payment);
     }
 }
-

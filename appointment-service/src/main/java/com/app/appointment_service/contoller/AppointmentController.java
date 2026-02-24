@@ -1,5 +1,6 @@
 package com.app.appointment_service.contoller;
 
+import com.app.appointment_service.dto.AppointmentRequest; // FIX: Added missing import
 import com.app.appointment_service.entity.Appointment;
 import com.app.appointment_service.service.AppointmentService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,4 +37,3 @@ public class AppointmentController {
         );
     }
 }
-
