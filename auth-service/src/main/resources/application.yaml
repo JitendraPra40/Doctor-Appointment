@@ -69,7 +69,6 @@ jwt:
 
 # Twilio — set these as environment variables
 twilio:
-  account-sid: AC0212b8bfa817d80c9f51992982771335
-  auth-token: b85e5566191703c2f423f514370b5eb9
-  phone-number: +14352928634
-
+  account-sid: AC0
+  auth-token: b85e5
+  phone-number: +14
