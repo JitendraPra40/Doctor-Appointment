@@ -2,14 +2,18 @@ package com.app.auth_service.service;
 
 import com.app.auth_service.config.JwtTokenProvider;
 import com.app.auth_service.dto.TokensDto;
+import com.app.auth_service.dto.UserDto;
 import com.app.auth_service.entity.Admin;
 import com.app.auth_service.entity.User;
 import com.app.auth_service.exception.NotFoundException;
 import com.app.auth_service.propertiesConfig.JwtProperties;
 import com.app.auth_service.repository.AdminRepository;
 import com.app.auth_service.repository.UserRepository;
+import com.app.auth_service.roles.Role;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import java.security.SecureRandom;
 
 
@@ -40,6 +44,15 @@ public class AdminService {
         this.emailOtpService = emailOtpService;
         this.userRepository = userRepository;
 
+    }
+
+    public String register(UserDto admin){
+        User user = new User();
+        user.setMobile(admin.getMobile());
+        user.setEmail(admin.getEmail());
+        user.setRole(Role.ADMIN);
+        userRepository.save(user);
+        return "Register Successfully";
     }
 
     public void sendEmailOtp(String email) {

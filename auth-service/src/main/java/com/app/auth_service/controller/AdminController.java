@@ -1,9 +1,6 @@
 package com.app.auth_service.controller;
 
-import com.app.auth_service.dto.AccessTokenResponse;
-import com.app.auth_service.dto.EmailOtpRequest;
-import com.app.auth_service.dto.TokensDto;
-import com.app.auth_service.dto.VerifyEmailOtp;
+import com.app.auth_service.dto.*;
 import com.app.auth_service.service.AdminService;
 import com.app.auth_service.utility.CookieUtil;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,6 +20,12 @@ public class AdminController {
     public AdminController(CookieUtil cookieUtil, AdminService adminService) {
         this.cookieUtil = cookieUtil;
         this.adminService = adminService;
+    }
+
+    @PostMapping("/register")
+    public String adminRegister(@RequestBody UserDto admin){
+        String register = adminService.register(admin);
+        return register;
     }
 
     @PostMapping("/sendEmailOtp")
