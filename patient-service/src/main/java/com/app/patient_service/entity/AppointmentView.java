@@ -13,11 +13,11 @@ import java.util.UUID;
 public class AppointmentView {
 
     @Id
-    private UUID id;
+    private Long id;
 
-    private UUID patientId;
+    private Long patientId;
 
-    private UUID doctorId;
+    private Long doctorId;
 
     private LocalDate date;
 

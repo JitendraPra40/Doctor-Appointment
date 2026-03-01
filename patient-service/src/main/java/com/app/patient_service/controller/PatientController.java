@@ -1,4 +1,4 @@
-package com.app.patient_service.contoller;
+package com.app.patient_service.controller;
 
 import com.app.patient_service.entity.AppointmentView;
 import com.app.patient_service.entity.Patient;
@@ -23,20 +23,20 @@ public class PatientController {
 
     @GetMapping("/me")
     public Patient profile(Authentication auth) {
-        UUID userId = UUID.fromString(auth.getName());
+        Long userId = Long.valueOf(auth.getName());
         return service.getProfile(userId);
     }
 
     @PutMapping("/me")
     public Patient update(Authentication auth,
                           @RequestBody Patient patient) {
-        UUID userId = UUID.fromString(auth.getName());
+        Long userId = Long.valueOf(auth.getName());
         return service.updateProfile(userId, patient);
     }
 
     @GetMapping("/me/appointments")
     public List<AppointmentView> appointments(Authentication auth) {
-        UUID userId = UUID.fromString(auth.getName());
+        Long userId = Long.valueOf(auth.getName());
         return service.myAppointments(userId);
     }
 }

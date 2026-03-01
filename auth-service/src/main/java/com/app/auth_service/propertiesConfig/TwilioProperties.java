@@ -1,9 +1,9 @@
 package com.app.auth_service.propertiesConfig;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 @ConfigurationProperties(prefix = "twilio")
 public class TwilioProperties {
     private String accountSid;

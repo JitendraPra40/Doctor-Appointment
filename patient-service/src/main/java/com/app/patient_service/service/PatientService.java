@@ -23,17 +23,17 @@ public class PatientService {
         this.appointmentRepo = appointmentRepo;
     }
 
-    public Patient getProfile(UUID userId) {
+    public Patient getProfile(Long userId) {
         return patientRepo.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Patient not found"));
     }
 
-    public Patient updateProfile(UUID userId, Patient patient) {
+    public Patient updateProfile(Long userId, Patient patient) {
         patient.setId(userId);
         return patientRepo.save(patient);
     }
 
-    public List<AppointmentView> myAppointments(UUID userId) {
+    public List<AppointmentView> myAppointments(Long userId) {
         return appointmentRepo.findByPatientId(userId);
     }
 }

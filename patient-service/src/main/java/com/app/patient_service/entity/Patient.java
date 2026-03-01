@@ -14,10 +14,8 @@ import java.util.UUID;
 public class Patient {
 
     @Id
-    @GeneratedValue
-    @UuidGenerator
-    @Column(columnDefinition = "VARCHAR(36)")
-    private UUID id;   // SAME AS USER ID FROM AUTH SERVICE
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false)
     private String name;

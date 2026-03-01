@@ -56,7 +56,6 @@ public class AuthService {
         twilioSmsService.sendOtp(normalizedMobile, otp);
     }
 
-    // User login and Registration through mobile if not using otp
     public TokensDto verifyMobileOtp(String mobile, String otp) {
         mobile = mobile.trim();
         String normalizedMobile = "+91" + mobile;
@@ -76,7 +75,7 @@ public class AuthService {
 
 
 
-    // User login and Registration through email if not using otp
+    // User login and Registration through email
 //    public void sendEmailOtp(String email) {
 //        email = email.trim();
 //        String otp = String.valueOf( new SecureRandom().nextInt(900000) + 100000 );
@@ -100,7 +99,7 @@ public class AuthService {
 //    }
 
 
-    // This approch if you with first user registration and provide login with mobile or email
+    // This approch is for if you want a proper user registration with all fields and provide login with mobile or email
 //    public String register(String username, String mobile, String email){
 //        User user = new User();
 //        user.setUsername(username);

@@ -13,12 +13,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>auth-service</name>
     <description>auth-service</description>
-    <url/>
-    <licenses><license/></licenses>
-    <developers><developer/></developers>
-    <scm>
-        <connection/><developerConnection/><tag/><url/>
-    </scm>
     <properties>
         <java.version>21</java.version>
         <spring-cloud.version>2025.0.1</spring-cloud.version>
@@ -64,10 +58,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- FIX: Removed spring-security-oauth2-autoconfigure (2.1.6) — incompatible with Spring Boot 3.x.
-             It uses javax.* namespace while Spring Boot 3.x requires jakarta.* namespace.
-             Auth server role is handled by our custom JwtTokenProvider + JwksController. -->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-client</artifactId>
@@ -88,14 +78,18 @@
             <groupId>com.twilio.sdk</groupId>
             <artifactId>twilio</artifactId>
             <version>11.3.1</version>
-            <scope>compile</scope>
         </dependency>
 
+        <!-- ✅ FIX: configuration-processor stays as <dependency> for runtime,
+             BUT must ALSO be added to annotationProcessorPaths in maven-compiler-plugin
+             so the metadata (spring-configuration-metadata.json) is generated
+             at compile time → IntelliJ reads it → warnings disappear. -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
@@ -105,6 +99,17 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>10.4</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+
+        <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -120,17 +125,69 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Swagger -->
         <dependency>
-            <groupId>com.nimbusds</groupId>
-            <artifactId>nimbus-jose-jwt</artifactId>
-            <version>10.4</version>
-            <scope>compile</scope>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <!-- Resilience4j -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
         </dependency>
         <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <!-- ✅ Already present in all services (includes JUnit5, Mockito, AssertJ) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- ✅ Spring Security test utilities: @WithMockUser, csrf() post processor -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- ✅ Kafka test support: EmbeddedKafka for integration tests -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- ✅ Jackson Java 8 time module: serializes LocalDate/LocalTime in JSON -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--
+             NOTE FOR GATEWAY SERVICE ONLY:
+             Gateway uses WebFlux. Replace @WebMvcTest with @WebFluxTest
+             and use WebTestClient instead of MockMvc.
+             WebFluxTest is included in spring-boot-starter-test already.
+        -->
+
     </dependencies>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -149,10 +206,18 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <!-- ✅ FIX: Both lombok AND configuration-processor must be listed here.
+                         This tells the compiler to run both annotation processors,
+                         generating spring-configuration-metadata.json which IntelliJ
+                         uses to validate application.yaml keys — eliminating the warnings. -->
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
+                        </path>
+                        <path>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-configuration-processor</artifactId>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

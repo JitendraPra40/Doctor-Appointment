@@ -13,91 +13,80 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>notification-service</name>
     <description>notification-service</description>
-    <url/>
-    <licenses><license/></licenses>
-    <developers><developer/></developers>
-    <scm><connection/><developerConnection/><tag/><url/></scm>
     <properties>
         <java.version>21</java.version>
         <spring-cloud.version>2025.0.1</spring-cloud.version>
     </properties>
     <dependencies>
-
-        <!-- Mail -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
-
-        <!-- Web (needed for Eureka health endpoint) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-        <!-- Kafka -->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
-
-        <!--
-            FIX: Eureka Client with Jersey EXCLUDED.
-            eureka-client 2.0.5 tries to autowire TransportClientFactories (Jersey).
-            The fix: exclude the eureka-client jar that pulls in Jersey transport,
-            and use spring-cloud-netflix-eureka-client with the httpclient5 transport instead.
-        -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
             <exclusions>
-                <!-- Exclude Netflix's Jersey-based transport -->
                 <exclusion>
                     <groupId>com.netflix.eureka</groupId>
                     <artifactId>eureka-client</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
-
-        <!--
-            Use the newer eureka-client that supports non-Jersey transports.
-            This version registers via httpclient5 (already on classpath via spring-cloud-commons)
-            and does NOT require TransportClientFactories (Jersey) bean.
-        -->
         <dependency>
             <groupId>com.netflix.eureka</groupId>
             <artifactId>eureka-client</artifactId>
             <version>2.0.5</version>
             <exclusions>
-                <exclusion>
-                    <groupId>com.sun.jersey</groupId>
-                    <artifactId>jersey-client</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.jersey</groupId>
-                    <artifactId>jersey-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.jersey.contribs</groupId>
-                    <artifactId>jersey-apache-client4</artifactId>
-                </exclusion>
+                <exclusion><groupId>com.sun.jersey</groupId><artifactId>jersey-client</artifactId></exclusion>
+                <exclusion><groupId>com.sun.jersey</groupId><artifactId>jersey-core</artifactId></exclusion>
+                <exclusion><groupId>com.sun.jersey.contribs</groupId><artifactId>jersey-apache-client4</artifactId></exclusion>
             </exclusions>
         </dependency>
-
-        <!-- HttpClient5 — used by Eureka client as Jersey replacement -->
         <dependency>
             <groupId>org.apache.httpcomponents.client5</groupId>
             <artifactId>httpclient5</artifactId>
         </dependency>
 
-        <!-- Lombok -->
+        <!-- ✅ Resilience4j — resilient email sending with retry + circuit breaker -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- ✅ Swagger -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <!-- ✅ SLF4J -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -109,8 +98,34 @@
             <scope>test</scope>
         </dependency>
 
-    </dependencies>
+        <!-- ✅ Spring Security test utilities: @WithMockUser, csrf() post processor -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
+        <!-- ✅ Kafka test support: EmbeddedKafka for integration tests -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- ✅ Jackson Java 8 time module: serializes LocalDate/LocalTime in JSON -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--
+             NOTE FOR GATEWAY SERVICE ONLY:
+             Gateway uses WebFlux. Replace @WebMvcTest with @WebFluxTest
+             and use WebTestClient instead of MockMvc.
+             WebFluxTest is included in spring-boot-starter-test already.
+        -->
+    </dependencies>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -122,7 +137,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <build>
         <plugins>
             <plugin>

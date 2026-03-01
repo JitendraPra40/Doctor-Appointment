@@ -5,26 +5,14 @@ spring:
   application:
     name: doctor-service
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8081
-          jwk-set-uri: http://localhost:8081/sso-auth-server/.well-known/jwks.json
-
-  # Database (MySQL)
   datasource:
     url: jdbc:mysql://localhost:3307/a_doctordb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-  # JPA / Hibernate
   jpa:
     hibernate:
-      # FIX: Changed from 'update' to 'update' (keeping update) but disabled Flyway.
-      # Flyway was enabled with 'baseline-on-migrate: true' but NO migration scripts exist,
-      # causing startup failure: "Found non-empty schema without schema history table".
       ddl-auto: update
     show-sql: true
     properties:
@@ -32,17 +20,20 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
 
-  # FIX: Disabled Flyway — no migration scripts exist in the project.
   flyway:
     enabled: false
 
-  # Kafka
   kafka:
     bootstrap-servers: localhost:9092
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
-# Eureka Client
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8081/sso-auth-server/.well-known/jwks.json
+
 eureka:
   client:
     service-url:
@@ -50,8 +41,52 @@ eureka:
   instance:
     prefer-ip-address: true
 
-# Logging for Debugging
+# ── Resilience4j ─────────────────────────────────────────────────────────────
+resilience4j:
+  circuitbreaker:
+    instances:
+      kafkaPublisher:
+        sliding-window-size: 10
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3
+        automatic-transition-from-open-to-half-open-enabled: true
+        register-health-indicator: true
+  retry:
+    instances:
+      kafkaPublisher:
+        max-attempts: 3
+        wait-duration: 500ms
+
+# ── Actuator ─────────────────────────────────────────────────────────────────
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,circuitbreakers,circuitbreakerevents,metrics
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+
+# ── Swagger / OpenAPI ─────────────────────────────────────────────────────────
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+
+# ── Logging / SLF4J ──────────────────────────────────────────────────────────
 logging:
   level:
-    org.springframework.security: DEBUG
-    org.springframework.web: INFO
+    com.app.doctor_service: DEBUG
+    org.springframework.security: WARN
+    io.github.resilience4j: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%X{traceId}] %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%X{traceId}] %logger{36} - %msg%n"
+  file:
+    name: logs/doctor-service.log

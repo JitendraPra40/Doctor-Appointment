@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface AppointmentViewRepository
-        extends JpaRepository<AppointmentView, UUID> {
+        extends JpaRepository<AppointmentView, Long> {
 
-    List<AppointmentView> findByPatientId(UUID patientId);
+    List<AppointmentView> findByPatientId(Long patientId);
 }
 

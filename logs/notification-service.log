@@ -1,0 +1,123 @@
+2026-03-01T19:35:51.300+05:30  INFO 5604 --- [notification-service] [main] c.a.n.NotificationServiceApplication     : Starting NotificationServiceApplication using Java 24.0.2 with PID 5604 (D:\Java Full Stack & Devops\Projects\Doctor Appointment System Feature2\Doctor-Appointment\notification-service\target\classes started by jiten in D:\Java Full Stack & Devops\Projects\Doctor Appointment System Feature2\Doctor-Appointment)
+2026-03-01T19:35:51.302+05:30 DEBUG 5604 --- [notification-service] [main] c.a.n.NotificationServiceApplication     : Running with Spring Boot v3.5.9, Spring v6.2.15
+2026-03-01T19:35:51.303+05:30  INFO 5604 --- [notification-service] [main] c.a.n.NotificationServiceApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-03-01T19:35:52.196+05:30 DEBUG 5604 --- [notification-service] [main] i.g.r.s.u.RxJava2OnClasspathCondition    : RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-03-01T19:35:52.197+05:30 DEBUG 5604 --- [notification-service] [main] i.g.r.s.u.ReactorOnClasspathCondition    : Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-03-01T19:35:52.206+05:30 DEBUG 5604 --- [notification-service] [main] i.g.r.s.u.RxJava2OnClasspathCondition    : RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-03-01T19:35:52.207+05:30 DEBUG 5604 --- [notification-service] [main] i.g.r.s.u.ReactorOnClasspathCondition    : Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-03-01T19:35:52.239+05:30 DEBUG 5604 --- [notification-service] [main] i.g.r.s.u.RxJava2OnClasspathCondition    : RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-03-01T19:35:52.239+05:30 DEBUG 5604 --- [notification-service] [main] i.g.r.s.u.ReactorOnClasspathCondition    : Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-03-01T19:35:52.248+05:30 DEBUG 5604 --- [notification-service] [main] i.g.r.s.u.RxJava2OnClasspathCondition    : RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-03-01T19:35:52.249+05:30 DEBUG 5604 --- [notification-service] [main] i.g.r.s.u.ReactorOnClasspathCondition    : Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-03-01T19:35:52.261+05:30 DEBUG 5604 --- [notification-service] [main] i.g.r.s.u.RxJava2OnClasspathCondition    : RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-03-01T19:35:52.262+05:30 DEBUG 5604 --- [notification-service] [main] i.g.r.s.u.ReactorOnClasspathCondition    : Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-03-01T19:35:52.274+05:30 DEBUG 5604 --- [notification-service] [main] i.g.r.s.u.RxJava2OnClasspathCondition    : RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-03-01T19:35:52.274+05:30 DEBUG 5604 --- [notification-service] [main] i.g.r.s.u.ReactorOnClasspathCondition    : Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-03-01T19:35:52.869+05:30  INFO 5604 --- [notification-service] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=351ea14d-201b-377d-9f08-0f48711c8ace
+2026-03-01T19:35:53.611+05:30  INFO 5604 --- [notification-service] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8086 (http)
+2026-03-01T19:35:53.627+05:30  INFO 5604 --- [notification-service] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-01T19:35:53.627+05:30  INFO 5604 --- [notification-service] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.50]
+2026-03-01T19:35:53.707+05:30  INFO 5604 --- [notification-service] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-01T19:35:53.707+05:30  INFO 5604 --- [notification-service] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2352 ms
+2026-03-01T19:35:54.628+05:30  WARN 5604 --- [notification-service] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration$EnableWebMvcConfiguration': Unsatisfied dependency expressed through method 'setConfigurers' parameter 0: Error creating bean with name 'swaggerWebMvcConfigurer' defined in class path resource [org/springdoc/webmvc/ui/SwaggerConfig.class]: Unsatisfied dependency expressed through method 'swaggerWebMvcConfigurer' parameter 1: Error creating bean with name 'indexPageTransformer' defined in class path resource [org/springdoc/webmvc/ui/SwaggerConfig.class]: Unsatisfied dependency expressed through method 'indexPageTransformer' parameter 4: Error creating bean with name 'springdocObjectMapperProvider' defined in class path resource [org/springdoc/core/configuration/SpringDocConfiguration.class]: Failed to instantiate [org.springdoc.core.providers.ObjectMapperProvider]: Factory method 'springdocObjectMapperProvider' threw exception with message: com/fasterxml/jackson/datatype/jsr310/JavaTimeModule
+2026-03-01T19:35:54.634+05:30  INFO 5604 --- [notification-service] [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-03-01T19:35:54.660+05:30  INFO 5604 --- [notification-service] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-03-01T19:35:54.677+05:30 ERROR 5604 --- [notification-service] [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration$EnableWebMvcConfiguration': Unsatisfied dependency expressed through method 'setConfigurers' parameter 0: Error creating bean with name 'swaggerWebMvcConfigurer' defined in class path resource [org/springdoc/webmvc/ui/SwaggerConfig.class]: Unsatisfied dependency expressed through method 'swaggerWebMvcConfigurer' parameter 1: Error creating bean with name 'indexPageTransformer' defined in class path resource [org/springdoc/webmvc/ui/SwaggerConfig.class]: Unsatisfied dependency expressed through method 'indexPageTransformer' parameter 4: Error creating bean with name 'springdocObjectMapperProvider' defined in class path resource [org/springdoc/core/configuration/SpringDocConfiguration.class]: Failed to instantiate [org.springdoc.core.providers.ObjectMapperProvider]: Factory method 'springdocObjectMapperProvider' threw exception with message: com/fasterxml/jackson/datatype/jsr310/JavaTimeModule
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:895) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:848) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1228) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1194) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1130) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:990) ~[spring-context-6.2.15.jar:6.2.15]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.15.jar:6.2.15]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.9.jar:3.5.9]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.5.9.jar:3.5.9]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.9.jar:3.5.9]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.9.jar:3.5.9]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.9.jar:3.5.9]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.9.jar:3.5.9]
+	at com.app.notification_service.NotificationServiceApplication.main(NotificationServiceApplication.java:12) ~[classes/:na]
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'swaggerWebMvcConfigurer' defined in class path resource [org/springdoc/webmvc/ui/SwaggerConfig.class]: Unsatisfied dependency expressed through method 'swaggerWebMvcConfigurer' parameter 1: Error creating bean with name 'indexPageTransformer' defined in class path resource [org/springdoc/webmvc/ui/SwaggerConfig.class]: Unsatisfied dependency expressed through method 'indexPageTransformer' parameter 4: Error creating bean with name 'springdocObjectMapperProvider' defined in class path resource [org/springdoc/core/configuration/SpringDocConfiguration.class]: Failed to instantiate [org.springdoc.core.providers.ObjectMapperProvider]: Factory method 'springdocObjectMapperProvider' threw exception with message: com/fasterxml/jackson/datatype/jsr310/JavaTimeModule
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.addCandidateEntry(DefaultListableBeanFactory.java:2022) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1985) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveMultipleBeanCollection(DefaultListableBeanFactory.java:1875) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveMultipleBeans(DefaultListableBeanFactory.java:1843) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1719) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1653) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:887) ~[spring-beans-6.2.15.jar:6.2.15]
+	... 22 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'indexPageTransformer' defined in class path resource [org/springdoc/webmvc/ui/SwaggerConfig.class]: Unsatisfied dependency expressed through method 'indexPageTransformer' parameter 4: Error creating bean with name 'springdocObjectMapperProvider' defined in class path resource [org/springdoc/core/configuration/SpringDocConfiguration.class]: Failed to instantiate [org.springdoc.core.providers.ObjectMapperProvider]: Factory method 'springdocObjectMapperProvider' threw exception with message: com/fasterxml/jackson/datatype/jsr310/JavaTimeModule
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1770) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1653) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-6.2.15.jar:6.2.15]
+	... 39 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'springdocObjectMapperProvider' defined in class path resource [org/springdoc/core/configuration/SpringDocConfiguration.class]: Failed to instantiate [org.springdoc.core.providers.ObjectMapperProvider]: Factory method 'springdocObjectMapperProvider' threw exception with message: com/fasterxml/jackson/datatype/jsr310/JavaTimeModule
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1770) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1653) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-6.2.15.jar:6.2.15]
+	... 53 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springdoc.core.providers.ObjectMapperProvider]: Factory method 'springdocObjectMapperProvider' threw exception with message: com/fasterxml/jackson/datatype/jsr310/JavaTimeModule
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:200) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:89) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:169) ~[spring-beans-6.2.15.jar:6.2.15]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653) ~[spring-beans-6.2.15.jar:6.2.15]
+	... 67 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: com/fasterxml/jackson/datatype/jsr310/JavaTimeModule
+	at org.springdoc.core.configuration.SpringDocConfiguration.springdocObjectMapperProvider(SpringDocConfiguration.java:446) ~[springdoc-openapi-starter-common-2.6.0.jar:2.6.0]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:172) ~[spring-beans-6.2.15.jar:6.2.15]
+	... 70 common frames omitted
+Caused by: java.lang.ClassNotFoundException: com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:580) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:490) ~[na:na]
+	... 74 common frames omitted
+

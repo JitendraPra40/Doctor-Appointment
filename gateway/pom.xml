@@ -12,27 +12,16 @@
     <artifactId>api-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>api-gateway</name>
-    <description>API Gateway for Doctor Appointment System</description>
-    <url/>
-    <licenses><license/></licenses>
-    <developers><developer/></developers>
-    <scm><connection/><developerConnection/><tag/><url/></scm>
     <properties>
         <java.version>21</java.version>
         <spring-cloud.version>2025.0.1</spring-cloud.version>
     </properties>
     <dependencies>
-
-        <!--
-            FIX: Replaced deprecated spring-cloud-starter-gateway
-                 with spring-cloud-starter-gateway-server-webflux.
-            The old artifact prints a loud warning and will be removed in the next major release.
-        -->
+        <!-- Gateway (WebFlux) -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway-server-webflux</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -43,25 +32,73 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
-        <!-- Required for lb:// load balancing -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
-        <!-- JWT resource server validation at gateway level -->
+
+        <!-- ✅ Resilience4j for Gateway circuit breakers on routes -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
         </dependency>
+
+        <!-- ✅ Swagger WebFlux (gateway uses WebFlux, not WebMVC) -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <!-- ✅ SLF4J -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-    </dependencies>
+        <!-- ✅ Already present in all services (includes JUnit5, Mockito, AssertJ) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
+        <!-- ✅ Spring Security test utilities: @WithMockUser, csrf() post processor -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- ✅ Kafka test support: EmbeddedKafka for integration tests -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- ✅ Jackson Java 8 time module: serializes LocalDate/LocalTime in JSON -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--
+             NOTE FOR GATEWAY SERVICE ONLY:
+             Gateway uses WebFlux. Replace @WebMvcTest with @WebFluxTest
+             and use WebTestClient instead of MockMvc.
+             WebFluxTest is included in spring-boot-starter-test already.
+        -->
+
+    </dependencies>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -73,7 +110,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <build>
         <plugins>
             <plugin>

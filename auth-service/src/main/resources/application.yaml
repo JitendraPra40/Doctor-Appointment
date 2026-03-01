@@ -69,6 +69,58 @@ jwt:
 
 # Twilio — set these as environment variables
 twilio:
-  account-sid: AC0
-  auth-token: b85e5
-  phone-number: +14
+  account-sid: AC0212b8bfa817d80c9f51992982771335
+  auth-token: b85e5566191703c2f423f514370b5eb9
+  phone-number: +14352928634
+
+# ── Resilience4j (for Redis OTP and email sending) ───────────────────────────
+resilience4j:
+  circuitbreaker:
+    instances:
+      emailSender:
+        sliding-window-size: 10
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 30s
+        register-health-indicator: true
+      redisOtp:
+        sliding-window-size: 5
+        failure-rate-threshold: 60
+        wait-duration-in-open-state: 15s
+        register-health-indicator: true
+  retry:
+    instances:
+      emailSender:
+        max-attempts: 3
+        wait-duration: 2s
+
+# ── Actuator ─────────────────────────────────────────────────────────────────
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,circuitbreakers,metrics
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+
+# ── Swagger / OpenAPI ─────────────────────────────────────────────────────────
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+# ── Logging / SLF4J ────────────────────────────────────────────────────────
+logging:
+  level:
+    com.app.auth_service: DEBUG
+    org.springframework.security: WARN
+    io.github.resilience4j: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%X{traceId}] %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%X{traceId}] %logger{36} - %msg%n"
+  file:
+    name: logs/auth-service.log
